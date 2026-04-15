@@ -1,0 +1,199 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body, html {
+    width: 100vw; height: 100vh;
+    display: flex;
+    margin: 0; padding: 0;
+    background: #050505;
+    overflow: hidden;
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    user-select: none;
+}
+
+/* ── Canvas ── */
+#main-content {
+    flex-grow: 1;
+    position: relative;
+    background: #0a0a0a;
+    overflow: hidden;
+}
+
+#canvas-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1; /* WebGL Data Layer */
+}
+
+#canvas-2d-container {
+    position: absolute;
+    inset: 0;
+    width: 50%; /* Bloqué sur la moitié gauche */
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    border-right: 2px solid #333; /* Ligne de séparation élégante */
+    overflow: hidden; /* AJOUT CRUCIAL */
+}
+
+#canvas-2d {
+    width: 95%;
+    height: 95%;
+    object-fit: contain;
+    border: 1px solid #2a2a2a;
+}
+
+/* ── Date Banner ── */
+#date-banner {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+#date-display {
+    display: inline-block;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #ffffff;
+    /* Readability over any background: text shadow + semi-transparent pill */
+    text-shadow:
+        0 0 8px rgba(0,0,0,0.9),
+        1px 1px 0 #000,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 6px 18px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* ── Control Panel ── */
+#ui-panel {
+    width: 320px;
+    flex-shrink: 0;
+    height: 100%;
+    z-index: 20; /* Force le menu au-dessus du masque noir */
+    background: rgba(10, 10, 10, 0.88);
+    border-right: 1px solid #3a3a3a;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    backdrop-filter: blur(4px);
+    overflow-y: auto;
+}
+
+/* Rows */
+.ui-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+.ui-label {
+    color: #888;
+    white-space: nowrap;
+    min-width: 100px;
+    font-size: 12px;
+}
+.ui-row span, .ui-row select {
+    color: #e0e0e0;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+select {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    padding: 2px 4px;
+    flex: 1;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #2e2e2e;
+    margin: 10px 0;
+}
+
+/* Buttons */
+button {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    width: 100%;
+    margin-bottom: 8px;
+    transition: background 0.15s;
+}
+button:hover  { background: #2e2e2e; }
+button:active { background: #0a0a0a; }
+
+/* Play button accent */
+.play-btn {
+    background: #0d2a4a;
+    border-color: #1a5080;
+    color: #7ecfff;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.play-btn:hover  { background: #163d6a; }
+.play-btn.paused { background: #1a1a1a; color: #e0e0e0; border-color: #444; }
+
+/* Playback row */
+#playback-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+#playback-row .play-btn { margin-bottom: 4px; }
+
+.slider-wrap { width: 100%; }
+input[type=range] {
+    width: 100%;
+    accent-color: #4a9eff;
+    cursor: pointer;
+}
+
+/* ── Legend ── */
+.legend { margin-top: 12px; }
+.legend-title {
+    color: #888;
+    font-size: 11px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+.color-blocks {
+    display: flex;
+    width: 100%;
+    height: 14px;
+    border: 1px solid #333;
+}
+.color-blocks div {
+    flex: 1;
+    height: 100%;
+    font-size: 8px;
+    line-height: 14px;
+    text-align: center;
+    overflow: hidden;
+}
+.color-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    margin-top: 3px;
+    color: #666;
+}
