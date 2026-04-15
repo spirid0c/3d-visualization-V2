@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="IsoGSM 3D — Atmospheric water vapor tracer dynamics (Japan/Brazil, PWAT1/PWAT2)">
+    <title>IsoGSM — Atmospheric Vapor Tracer</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Protocol error: serve via a local HTTP server (Live Server, python -m http.server, etc.)');
+        }
+    </script>
+
+    <!-- ── DATE BANNER ── -->
+    <div id="date-banner">
+        <span id="date-display">01 JUL 2017</span>
+    </div>
+
+    <!-- ── CONTROL PANEL ── -->
+    <div id="ui-panel">
+
+        <!-- Season selector -->
+        <div class="ui-row">
+            <label class="ui-label">Period</label>
+            <select id="season-selector">
+                <option value="0">Summer (July 2017)</option>
+                <option value="1">Winter (January 2018)</option>
+            </select>
+        </div>
+
+        <!-- Tracer info -->
+        <div class="ui-row">
+            <label class="ui-label">Tracer</label>
+            <span id="dataset-label">PWAT1 — Japan</span>
+        </div>
+
+        <!-- Simulation day -->
+        <div class="ui-row">
+            <label class="ui-label">Simulation Day</label>
+            <span id="frame-label">1 / 91</span>
+        </div>
+
+        <hr>
+
+        <!-- Toggle tracer button -->
+        <button id="toggle-data">Switch Tracer (Japan ↔ Brazil)</button>
+
+        <!-- Playback controls -->
+        <div id="playback-row">
+            <button id="btn-toggle-view" style="background:#444; margin-bottom: 12px;">Toggle 2D / 3D View</button>
+            <button id="btn-play" class="play-btn">▶ Play</button>
+            <div class="slider-wrap">
+                <input type="range" id="time-slider" min="0" max="90" value="0">
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">Atmospheric Vapor [kg/m²]</div>
+            <div class="color-blocks">
+                <div style="background:#2e70c5" title="< 0.001">Tr</div>
+                <div style="background:#b2e5ff" title="0.001"></div>
+                <div style="background:#66ccff" title="0.002"></div>
+                <div style="background:#00ffff" title="0.005"></div>
+                <div style="background:#00cc00" title="0.01"></div>
+                <div style="background:#80ff00" title="0.02"></div>
+                <div style="background:#ffff00" title="0.05"></div>
+                <div style="background:#ffcc00" title="0.1"></div>
+                <div style="background:#ff9900" title="0.2"></div>
+                <div style="background:#ff6600" title="0.5"></div>
+                <div style="background:#ff0000" title="1"></div>
+                <div style="background:#cc0000" title="2"></div>
+                <div style="background:#990000" title="5"></div>
+                <div style="background:#ff00ff" title="> 10">&gt;10</div>
+            </div>
+            <div class="color-labels">
+                <span>0.001</span>
+                <span>0.05</span>
+                <span>10.0</span>
+            </div>
+        </div>
+
+    </div>
+
+    <main id="main-content">
+        <div id="canvas-container"></div>
+        <div id="canvas-2d-container" style="display:none;">
+            <canvas id="canvas-2d"></canvas>
+        </div>
+    </main>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
