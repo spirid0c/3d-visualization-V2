@@ -8,7 +8,7 @@ const PARAMS = {
     frames: 91,
     currentFrame: 0,
     datasetIndex: 1, // 1 for PWAT1, 2 for PWAT2
-    seasonIndex: 1,  // 0=Jan, 1=July
+    seasonIndex: 0,  // 0=Jan, 1=July
     viewMode: 0,     // 0 = 3D, 1 = 2D, 2 = SPLIT
 };
 
